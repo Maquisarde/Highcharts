@@ -2,7 +2,7 @@ import createChart1 from "./chart1.js";
 import createChart2 from "./chart2.js";
 
 //
-fetch("../data/online_rend_all.csv")
+fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
@@ -19,7 +19,7 @@ fetch("../data/online_rend_all.csv")
   });
 
 //
-fetch("../data/online_rend_all_medium.csv")
+fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
@@ -36,7 +36,7 @@ fetch("../data/online_rend_all_medium.csv")
   });
 
 //
-fetch("../data/Peccala tokens historic prices - DO NOT MOVE - PECH.csv")
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTEO-RhkWqL8YEmHDDajNl74WK9Q4RqcRXVoxxaVBA66AdndxZ5HgZOOo0NAvY9nOZEcxqQ6oZ1p1wE/pub?gid=0&single=true&output=csv")
   .then((res) => res.text())
   .then((csvText) => {
     createChart2("chart2-high-risk", csvText);
@@ -46,7 +46,7 @@ fetch("../data/Peccala tokens historic prices - DO NOT MOVE - PECH.csv")
   });
 
 //
-fetch("../data/Peccala tokens historic prices - DO NOT MOVE - PECM.csv")
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTEO-RhkWqL8YEmHDDajNl74WK9Q4RqcRXVoxxaVBA66AdndxZ5HgZOOo0NAvY9nOZEcxqQ6oZ1p1wE/pub?gid=1193723508&single=true&output=csv")
   .then((res) => res.text())
   .then((csvText) => {
     createChart2("chart2-medium-risk", csvText);
