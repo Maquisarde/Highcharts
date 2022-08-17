@@ -65,6 +65,7 @@
 
 .price-change-card .price {
   font-size: 28px;
+  font-weight: bold;
 }
 
 .price-change-card .change {
