@@ -71,6 +71,7 @@
 .price-change-card .change {
   padding-left: 5px;
   font-size: 14px;
+  font-weight: bold;
   color: gray;
 }
 
