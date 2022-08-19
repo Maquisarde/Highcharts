@@ -1,5 +1,4 @@
-import { parseCSV, isNumeric, isValidDate, round } from "./utils.js";
-
+import { parseCSV, isNumeric, isValidDate, round } from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/utils.js";
 function createChart(
   containerId,
   csvText,
@@ -12,37 +11,30 @@ function createChart(
       date: new Date(d["Timestamp"] * 1000),
     }))
     .filter((d) => isValidDate(d.date));
-
   rawdata.sort((a, b) => a.date.getTime() - b.date.getTime());
-
   //series
   const series = seriesScheme.map((item) => {
     const data = rawdata.map((d) => ({
       date: d.date,
       value: isNumeric(d[item.name]) ? d[item.name] * 1 : null,
     }));
-
     return {
       ...item,
       type: "line",
       data: data.map((d) => [d.date.getTime(), d.value]),
     };
   });
-
   //chart options
   const options = {
     exporting: {
       enabled: false,
     },
-
     title: {
       text: null,
     },
-
     subtitle: {
       text: null,
     },
-
     chart: {
       panning: false,
       animation: true,
@@ -53,17 +45,13 @@ function createChart(
       marginRight: 60,
       events: {},
     },
-
     navigator: {
       enabled: false,
     },
-
     scrollbar: {
       enabled: false,
     },
-
     credits: { enabled: false },
-
     yAxis: {
       title: {
         text: null,
@@ -77,7 +65,6 @@ function createChart(
         },
       },
     },
-
     xAxis: {
       accessibility: {
         rangeDescription: "Date",
@@ -131,7 +118,6 @@ function createChart(
         },
       ],
     },
-
     tooltip: {
       backgroundColor: null,
       borderColor: null,
@@ -143,7 +129,6 @@ function createChart(
           `<div >${Highcharts.dateFormat("%b %d", this.x)}</div>`,
           `<div>${round(this.y, 2, true)} X</div>`,
         ];
-
         return `<div style="text-align: right;text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
                1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;">${rows.join(
                  ""
@@ -151,37 +136,29 @@ function createChart(
       },
     },
   };
-
   //
   var isYAxisLogarithmic = false;
-
   //create chart
   options.yAxis.type = isYAxisLogarithmic ? "logarithmic" : "linear";
   const chart = Highcharts.chart(containerId, options);
-
   //event
   //button
   const button = document.createElement("button");
   const container = document.getElementById(containerId);
   container.parentNode.insertBefore(button, container);
   button.addEventListener("click", handleSwitch);
-
   updateButton();
-
   function handleSwitch() {
     isYAxisLogarithmic = !isYAxisLogarithmic;
     updateButton();
-
     chart.yAxis[0].update({
       type: isYAxisLogarithmic ? "logarithmic" : "linear",
     });
   }
-
   function updateButton() {
     button.innerHTML = isYAxisLogarithmic
       ? "Logarithmic Scale"
       : "Linear Scale";
   }
 }
-
 export default createChart;
