@@ -1,5 +1,5 @@
-import createChart1 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/chart1.js";
-import createChart2 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/chart2.js";
+import createChart1 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@latest/js/chart1.js";
+import createChart2 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@latest/js/chart2.js";
 //
 fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .then((res) => res.text())
