@@ -1,6 +1,5 @@
-import createChart1 from "./chart1.js";
-import createChart2 from "./chart2.js";
-
+import createChart1 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/chart1.js";
+import createChart2 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/chart2.js";
 //
 fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .then((res) => res.text())
@@ -16,7 +15,6 @@ fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .catch((e) => {
     console.error("e", e);
   });
-
 //
 fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1")
   .then((res) => res.text())
@@ -27,13 +25,11 @@ fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1
       { name: "ETH/USDT", color: "#3c3c3d" },
       { name: "XRP/USDT", color: "#00aae4" },
     ];
-
     createChart1("chart1-medium-risk", csvText, series);
   })
   .catch((e) => {
     console.error("e", e);
   });
-
 //
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTEO-RhkWqL8YEmHDDajNl74WK9Q4RqcRXVoxxaVBA66AdndxZ5HgZOOo0NAvY9nOZEcxqQ6oZ1p1wE/pub?gid=0&single=true&output=csv")
   .then((res) => res.text())
@@ -43,7 +39,6 @@ fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTEO-RhkWqL8YEmHDDajNl74W
   .catch((e) => {
     console.error("e", e);
   });
-
 //
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTEO-RhkWqL8YEmHDDajNl74WK9Q4RqcRXVoxxaVBA66AdndxZ5HgZOOo0NAvY9nOZEcxqQ6oZ1p1wE/pub?gid=1193723508&single=true&output=csv")
   .then((res) => res.text())
