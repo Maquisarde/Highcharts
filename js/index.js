@@ -2,7 +2,7 @@ import createChart1 from "./chart1.js";
 import createChart2 from "./chart2.js";
 
 //
-fetch("https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/data/online_rend_all.csv",{mode: 'no-cors'})
+fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
@@ -11,7 +11,6 @@ fetch("https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/data/online_rend_a
       { name: "ETH", color: "#3c3c3d" },
       { name: "XRP", color: "#00aae4" },
     ];
-
     createChart1("chart1-high-risk", csvText, series);
   })
   .catch((e) => {
@@ -19,7 +18,7 @@ fetch("https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/data/online_rend_a
   });
 
 //
-fetch("https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/data/online_rend_all_medium.csv",{mode: 'no-cors'})
+fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
