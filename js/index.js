@@ -1,7 +1,7 @@
 import createChart1 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@latest/js/chart1.js";
 import createChart2 from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@latest/js/chart2.js";
 //
-fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1",{ mode: 'no-cors'})
+fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
@@ -16,7 +16,7 @@ fetch("https://www.dropbox.com/s/1mok8uvlgl4xj9i/online_rend_all.csv?dl=1",{ mod
     console.error("e", e);
   });
 //
-fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1",{ mode: 'no-cors'})
+fetch("https://www.dropbox.com/s/2wewp54g6hx971l/online_rend_all_medium.csv?dl=1")
   .then((res) => res.text())
   .then((csvText) => {
     const series = [
