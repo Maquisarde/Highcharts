@@ -1,5 +1,4 @@
-import { parseCSV, isNumeric, isValidDate, round } from "./utils.js";
-
+import { parseCSV, isNumeric, isValidDate, round } from "https://cdn.jsdelivr.net/gh/Maquisarde/Highcharts@main/js/utils.js";
 function createChart(containerId, csvText) {
   //parse from csv
   const rawdata = parseCSV(csvText)
@@ -8,12 +7,9 @@ function createChart(containerId, csvText) {
       price: isNumeric(d.token_price) ? d.token_price * 1 : null,
     }))
     .filter((d) => isValidDate(d.date));
-
   rawdata.sort((a, b) => a.date.getTime() - b.date.getTime());
-
   //data
   const data = rawdata.map((d) => [d.date.getTime(), d.price]);
-
   //series
   const series = [
     {
@@ -39,7 +35,6 @@ function createChart(containerId, csvText) {
     //   enableMouseTracking: false,
     // },
   ];
-
   //chart options
   const options = {
     title: {
@@ -64,13 +59,10 @@ function createChart(containerId, csvText) {
         render(e) {
           const xAxis = e.target.xAxis[0];
           const yAxis = e.target.yAxis[0];
-
           const dataInRange = data.filter(
             (d) => xAxis.min <= d[0] && d[0] <= xAxis.max
           );
-
           yAxis.removePlotLine();
-
           if (dataInRange.length !== 0)
             yAxis.addPlotLine({
               value: dataInRange[0][1],
@@ -78,7 +70,6 @@ function createChart(containerId, csvText) {
               dashStyle: "Dot",
               width: 2,
             });
-
           //card
           const cardEl = document.getElementById(containerId + "-card");
           setPriceChangeCard(cardEl, dataInRange, true, [xAxis.min, xAxis.max]);
@@ -112,9 +103,7 @@ function createChart(containerId, csvText) {
         },
       },
     },
-
     credits: { enabled: false },
-
     yAxis: {
       title: {
         text: null,
@@ -134,7 +123,6 @@ function createChart(containerId, csvText) {
         },
       },
     },
-
     xAxis: {
       accessibility: {
         rangeDescription: "Date",
@@ -180,7 +168,6 @@ function createChart(containerId, csvText) {
         },
       ],
     },
-
     tooltip: {
       split: true,
       backgroundColor: null,
@@ -201,7 +188,6 @@ function createChart(containerId, csvText) {
           ,
           `<div>$${round(this.y, 4, true)}</div>`,
         ];
-
         return `<div style="text-align:right;text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
                1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;">${rows.join(
                  ""
@@ -210,46 +196,36 @@ function createChart(containerId, csvText) {
     },
     xDateFormat: "%d %b %Y",
   };
-
   //containerEl
   const containerEl = document.getElementById(containerId);
   containerEl.classList.add("chart-container");
-
   //chart
   const chartWrapperEl = document.createElement("div");
   chartWrapperEl.setAttribute("id", containerId + "-chart");
   containerEl.appendChild(chartWrapperEl);
-
   //create chart
   const chart = Highcharts.stockChart(containerId + "-chart", options);
-
   //card
   const cardEl = document.createElement("div");
   cardEl.setAttribute("id", containerId + "-card");
   cardEl.setAttribute("class", "price-change-card");
   containerEl.appendChild(cardEl);
-
   const priceEl = document.createElement("span");
   priceEl.setAttribute("class", "price");
   cardEl.appendChild(priceEl);
-
   const changeEl = document.createElement("span");
   changeEl.setAttribute("class", "change");
   cardEl.appendChild(changeEl);
-
   //button group
   const btnsWrapperEl = document.createElement("div");
   btnsWrapperEl.setAttribute("class", "btn-group-wrapper");
   containerEl.parentNode.insertBefore(btnsWrapperEl, containerEl);
-
   const btnsEl = document.createElement("ul");
   btnsEl.setAttribute("class", "btn-group");
   btnsWrapperEl.appendChild(btnsEl);
-
   //button time zoom
   const minTime = Math.min(...data.map((d) => d[0]));
   const maxTime = Math.max(...data.map((d) => d[0]));
-
   const yearFirstDayTime = new Date(
     new Date(maxTime).getFullYear(),
     0,
@@ -258,9 +234,7 @@ function createChart(containerId, csvText) {
     0,
     0
   ).getTime();
-
   const oneday = 24 * 3600 * 1000;
-
   [
     { text: "1D", min: maxTime - oneday },
     { text: "7D", min: maxTime - oneday * 7 },
@@ -275,14 +249,12 @@ function createChart(containerId, csvText) {
     li.innerHTML = d.text;
     btnsEl.appendChild(li);
     d.btn = li;
-
     //if disabled
     const subset = data.filter((f) => f[0] <= d.min);
     d.disabled = subset.length == 0;
     if (d.disabled) {
       li.classList.add("disabled");
     }
-
     //if selected by default
     if (d.selected) {
       li.classList.add("selected");
@@ -290,7 +262,6 @@ function createChart(containerId, csvText) {
     } else {
       li.classList.remove("selected");
     }
-
     //event
     li.addEventListener("click", () => {
       if (d.disabled) return;
@@ -301,11 +272,9 @@ function createChart(containerId, csvText) {
           dd.btn.classList.remove("selected");
         }
       });
-
       chart.xAxis[0].setExtremes(d.min, maxTime, true, false);
     });
   });
-
   //
   [{ text: "LOG", selected: false }].forEach((d, i, a) => {
     const li = document.createElement("li");
@@ -315,10 +284,8 @@ function createChart(containerId, csvText) {
     } else {
       li.classList.remove("selected");
     }
-
     d.btn = li;
     btnsEl.appendChild(li);
-
     //
     li.addEventListener("click", () => {
       d.selected = !d.selected;
@@ -327,30 +294,24 @@ function createChart(containerId, csvText) {
       } else {
         d.btn.classList.remove("selected");
       }
-
       chart.yAxis[0].update({
         type: d.selected ? "logarithmic" : "linear",
       });
     });
   });
 }
-
 function setPriceChangeCard(card, data, isDataInRange, timeRange) {
   if (card === null) return;
   const subset = isDataInRange
     ? data
     : data.filter((d) => timeRange[0] <= d[0] && d[0] <= timeRange[1]);
-
   const hasData = subset.length !== 0;
-
   const price0 = hasData ? subset[0][1] : undefined;
   const price1 = hasData ? subset[subset.length - 1][1] : undefined;
   const change = hasData ? (price1 - price0) / price0 : undefined;
-
   //price
   const priceEl = card.getElementsByClassName("price")[0];
   priceEl.innerHTML = `$ ${hasData ? round(price1, 4, false) : "-"}`;
-
   //change
   const changeEl = card.getElementsByClassName("change")[0];
   changeEl.setAttribute(
@@ -361,11 +322,9 @@ function setPriceChangeCard(card, data, isDataInRange, timeRange) {
       ? "change change-negative"
       : "change"
   );
-
   const sign = change > 0 ? "+" : change < 0 ? "-" : "";
   changeEl.innerHTML = `${sign}${
     hasData ? Math.abs(round(100 * change, 2, false)) + "%" : "-"
   }`;
 }
-
 export default createChart;
